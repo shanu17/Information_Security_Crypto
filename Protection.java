@@ -28,10 +28,12 @@ public class Protection
 	}
 	
 
-	public static byte[] makeDigest(String user, String password,
-									long t1, double q1)
-									throws NoSuchAlgorithmException
+	public static byte[] makeDigest(String user, String password,long t1, double q1) throws NoSuchAlgorithmException
 	{
-		// IMPLEMENT THIS FUNCTION.
+		MessageDigest md2 = MessageDigest.getInstance("SHA");
+		md2.update(user.getBytes());
+		md2.update(password.getBytes());
+		md2.update(makeBytes(t1,q1));
+		return md2.digest();
 	}
 }
