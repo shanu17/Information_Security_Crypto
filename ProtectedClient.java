@@ -5,12 +5,17 @@ import java.util.Date;
 
 public class ProtectedClient
 {
-	public void sendAuthentication(String user, String password, OutputStream outStream) throws IOException, NoSuchAlgorithmException 
+	//@SuppressWarnings("static-access")
+	public void sendAuthentication(String user, String password, OutputStream outStream) throws IOException, NoSuchAlgorithmException, NoSuchProviderException 
 	{
 		DataOutputStream out = new DataOutputStream(outStream);
-
-		// IMPLEMENT THIS FUNCTION.
-
+		Date date = new Date();
+		SecureRandom secureRandomGenerator = SecureRandom.getInstance("SHA1PRNG", "SUN");
+		double rand1 = secureRandomGenerator.nextDouble();
+		byte[] first = Protection.makeDigest(user, password, date.getTime(), rand1);
+		double rand2 = secureRandomGenerator.nextDouble();
+		byte[] second = Protection.makeDigest(first, date.getTime(), rand2);
+		out.write(second);
 		out.flush();
 	}
 
