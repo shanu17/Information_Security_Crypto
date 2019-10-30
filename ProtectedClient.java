@@ -12,10 +12,18 @@ public class ProtectedClient
 		Date date = new Date();
 		SecureRandom secureRandomGenerator = SecureRandom.getInstance("SHA1PRNG", "SUN");
 		double rand1 = secureRandomGenerator.nextDouble();
-		byte[] first = Protection.makeDigest(user, password, date.getTime(), rand1);
+		long t1 = date.getTime();
+		byte[] first = Protection.makeDigest(user, password, t1, rand1);
 		double rand2 = secureRandomGenerator.nextDouble();
-		byte[] second = Protection.makeDigest(first, date.getTime(), rand2);
+		long t2 = date.getTime();
+		byte[] second = Protection.makeDigest(first, t2, rand2);
+		out.writeChars(user);
+		out.writeDouble(rand1);
+		out.writeLong(t1);
+		out.writeDouble(rand2);
+		out.writeLong(t2);
 		out.write(second);
+		
 		out.flush();
 	}
 
