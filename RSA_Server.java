@@ -37,7 +37,39 @@ public class RSA_Server {
 		    switch(input)
 		    {
 		    case 1:
-		    	
+		    	byte[] ciphertext = Get_from_Client.readAllBytes();
+		    	byte[] sig_ciphertext = Get_from_Client.readAllBytes();
+		    	cipher.init(Cipher.DECRYPT_MODE, Private_Key_Server);
+		    	String plaintext = new String(cipher.doFinal(ciphertext));
+		    	  
+			    signature.initVerify(Public_Key_Client);
+			    signature.update(plaintext.getBytes("UTF_8"));
+			    if(signature.verify(sig_ciphertext))
+			    {
+			    	System.out.println("The decrypted cipher text is  :  " + plaintext);
+			    	System.out.println("THe signature is correct");
+			    }
+			    else
+			    {
+			    	System.out.println("THe signature is not correct");
+			    }
+		    case 2:
+		    	ciphertext = Get_from_Client.readAllBytes();
+		    	sig_ciphertext = Get_from_Client.readAllBytes();
+		    	cipher.init(Cipher.DECRYPT_MODE, Public_Key_Client);
+		    	plaintext = new String(cipher.doFinal(ciphertext));
+		    	  
+			    signature.initVerify(Public_Key_Client);
+			    signature.update(plaintext.getBytes("UTF_8"));
+			    if(signature.verify(sig_ciphertext))
+			    {
+			    	System.out.println("The decrypted cipher text is  :  " + plaintext);
+			    	System.out.println("THe signature is correct");
+			    }
+			    else
+			    {
+			    	System.out.println("THe signature is not correct");
+			    }
 		    }
 		} catch (Exception e) {
 			e.printStackTrace();
