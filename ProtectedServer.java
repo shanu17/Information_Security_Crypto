@@ -5,12 +5,11 @@ import java.util.Arrays;
 
 public class ProtectedServer
 {
-	@SuppressWarnings("deprecation")
 	public boolean authenticate(InputStream inStream) throws IOException, NoSuchAlgorithmException 
 	{
 		DataInputStream in = new DataInputStream(inStream);
 		
-		String username = in.readLine();
+		String username = in.readUTF();
 		double rand1 = in.readDouble();
 		long t1 = in.readLong();
 		double rand2 = in.readDouble();

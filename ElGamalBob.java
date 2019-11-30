@@ -1,13 +1,16 @@
 import java.io.*;
 import java.net.*;
-import java.security.*;
 import java.math.BigInteger;
 
 public class ElGamalBob
 {
 	private static boolean verifySignature(	BigInteger y, BigInteger g, BigInteger p, BigInteger a, BigInteger b, String message)
 	{
-		// IMPLEMENT THIS FUNCTION;
+		BigInteger verify1 = (y.modPow(a, p).multiply(a.modPow(b, p))).mod(p);	//[(y^a) mod p] [(a^b) mod p] mod p
+		BigInteger m = new BigInteger(message.getBytes());
+		BigInteger verify2 = g.modPow(m, p);		//g^m mod p
+		
+		return verify1.equals(verify2);
 	}
 
 	public static void main(String[] args) throws Exception 

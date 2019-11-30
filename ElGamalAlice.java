@@ -7,29 +7,57 @@ public class ElGamalAlice
 {
 	private static BigInteger computeY(BigInteger p, BigInteger g, BigInteger d)
 	{
-		// IMPLEMENT THIS FUNCTION;
+		return g.modPow(d, p); // g^d mod p
 	}
 
 	private static BigInteger computeK(BigInteger p)
 	{
-		// IMPLEMENT THIS FUNCTION;
+		SecureRandom rand = new SecureRandom();
+		int bits = 1024;
+		BigInteger k = new BigInteger(bits,rand); // length of 1024 bits
+		while(!k.gcd(p.subtract(BigInteger.ONE)).equals(BigInteger.ONE))
+		{
+			k = new BigInteger(bits,rand);
+		}
+		return k;
 	}
 	
 	private static BigInteger computeA(BigInteger p, BigInteger g, BigInteger k)
 	{
-		// IMPLEMENT THIS FUNCTION;
+		return g.modPow(k, p); // g^k mod p
 	}
 
-	private static BigInteger computeB(	String message, BigInteger d, BigInteger a, BigInteger k, BigInteger p)
+	private static BigInteger computeB(String message, BigInteger d, BigInteger a, BigInteger k, BigInteger p)
 	{
-		// IMPLEMENT THIS FUNCTION;
+		BigInteger message_int = new BigInteger(message.getBytes());
+		BigInteger p_sub1 = p.subtract(BigInteger.ONE);
+		BigInteger p1 = p_sub1;
+		BigInteger x0 = BigInteger.ZERO;//0
+		BigInteger x1 = BigInteger.ONE;//1
+		BigInteger x2 = k;
+		BigInteger z, z2, z3;
+		while(!x2.equals(BigInteger.ZERO))
+		{
+			z = p_sub1.divide(x2);      //p1/x2
+			z2 = p_sub1.subtract(x2.multiply(z));         //p1-x2*z
+			p_sub1 = x2;
+			x2 = z2;
+			z3 = x0.subtract(x1.multiply(z));	//x0-x1*z
+			x0 = x1;
+			x1 = z3;
+		}
+		
+		BigInteger b = x0.multiply(message_int.subtract(d.multiply(a))).mod(p1);
+		//b = ((m-da)/k) mod (p-1) 
+		
+		return b;
 	}
 
 	public static void main(String[] args) throws Exception 
 	{
 		String message = "The quick brown fox jumps over the lazy dog.";
 
-		String host = "paradox.sis.pitt.edu";
+		String host = "127.0.0.1";
 		int port = 7999;
 		Socket s = new Socket(host, port);
 		ObjectOutputStream os = new ObjectOutputStream(s.getOutputStream());

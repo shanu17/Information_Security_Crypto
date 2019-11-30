@@ -34,7 +34,6 @@ public class Protection
 		md2.update(user.getBytes());
 		md2.update(password.getBytes());
 		md2.update(makeBytes(t1,q1));
-		byte[] out = md2.digest();
-		return out;
+		return md2.digest();
 	}
 }
