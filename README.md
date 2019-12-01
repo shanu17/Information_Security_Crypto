@@ -54,20 +54,20 @@ The client prints the whole certificate, validity period and verifies the signat
 
 ### Questions
 
-1. What are the limitations of using a self-signed certificate?
+1. What are the limitations of using a self-signed certificate?  
 Self-signed certificates are a risk because they aren't validated by any 3rd party CA.
 Users other than yourself would not trust your certificate. They are also hard to maintian and revoke.
-2. What are they useful for?
+2. What are they useful for?  
 Self-Signed certificates are cheaper to use than CA signed certificates and when using in a development environment or in a intranet.
 They can also be used for personal sites if there are only a few visitors.
 
 ### Side Note
 
 ##### How to generate the keystore.jks and certificate
-DISCLAIMER: Not required to execute for the assignement to run.
-Type the following commands in CMD.
-keytool -genkey -keyalg RSA -alias selfsigned -keystore keystore.jks -storepass password -validity 365 -keysize 2048
-keytool -list -v -keystore keystore.jks
+DISCLAIMER: Not required to execute for the assignement to run.  
+Type the following commands in CMD.  
+keytool -genkey -keyalg RSA -alias selfsigned -keystore keystore.jks -storepass password -validity 365 -keysize 2048  
+keytool -list -v -keystore keystore.jks  
 
 This creates a keystore.jks file with a self-signed certificate named selfsigned.cer with validity of 356 days from the day of creation.
 The second command checks if the first command has run properly.
