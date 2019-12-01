@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.security.*;
 import java.util.Date;
+import java.util.Scanner;
 
 public class ProtectedClient
 {
@@ -32,13 +33,16 @@ public class ProtectedClient
 	{
 		String host = "127.0.0.1";
 		int port = 7999;
-		String user = "George";
-		String password = "abc123";
+		Scanner keyboard = new Scanner(System.in);
+		System.out.println("Enter username:");
+		String user = keyboard.nextLine();
+		System.out.println("Enter password");
+		String password = keyboard.nextLine();
 		Socket s = new Socket(host, port);
 
 		ProtectedClient client = new ProtectedClient();
 		client.sendAuthentication(user, password, s.getOutputStream());
-
+		keyboard.close();
 		s.close();
 	}
 }

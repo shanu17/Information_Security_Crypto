@@ -39,8 +39,8 @@ public class X509_Client {
    
         try
         {
-    	   cert.checkValidity();
-    	   System.out.println("The certificate is valid.");
+           cert.checkValidity();
+    	   System.out.println("The certificate is signed using the private key that corresponds to the public key.");
         } catch (Exception e){
     	   System.out.println(e);   
         }
@@ -48,7 +48,7 @@ public class X509_Client {
         System.out.println("Message to send Server:");
         Scanner input = new Scanner(System.in);
         String message= input.nextLine();
-        
+        System.out.println("The message that is being sent to the server before encryption is: " + message);
         RSAPublicKey eServer = (RSAPublicKey) cert.getPublicKey();
         
         //Encrypt : server's public key 

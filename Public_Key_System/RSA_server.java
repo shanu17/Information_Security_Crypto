@@ -85,6 +85,7 @@ public class RSA_server {
 			    	System.out.println("THe signature is not correct");
 			    }
 		    }
+		    server.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

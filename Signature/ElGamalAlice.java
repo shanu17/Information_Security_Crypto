@@ -86,6 +86,8 @@ public class ElGamalAlice
 		BigInteger k = computeK(p);
 		BigInteger a = computeA(p, g, k);
 		BigInteger b = computeB(message, d, a, k, p);
+		
+		System.out.println("Signature of the message: " + b);
 
 		// send public key
 		os.writeObject(y);

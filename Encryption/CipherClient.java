@@ -2,6 +2,7 @@ package Encryption;
 
 import java.io.*;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.io.File;
 
@@ -21,6 +22,7 @@ public class CipherClient implements Serializable
 			objectOut.writeObject(key);
 			objectOut.close();
 			fos.close();
+			System.out.println("The DES key generated is:" + key);
 			return key;
 		}catch(Exception e)
 		{
@@ -28,13 +30,23 @@ public class CipherClient implements Serializable
 		}
 		return null;
 	}
+    public static String bytesToHex(byte[] hashInBytes) {
+
+        StringBuilder sb = new StringBuilder();
+        for (byte b : hashInBytes) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
+
+    }
 	public void send_ciphertext(String message, OutputStream outStream, Key key)
 	{
 		try {
             Cipher ecipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
             ecipher.init(Cipher.ENCRYPT_MODE, key);
             byte [] CipherText = ecipher.doFinal(message.getBytes());
-            
+            String ciphert = bytesToHex(CipherText);
+            System.out.println("The ciphertext generated is (In Hex): " + ciphert);
             DataOutputStream out = new DataOutputStream(outStream);
             out.write(CipherText);
             out.flush();

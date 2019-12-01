@@ -18,7 +18,6 @@ public class RSA_client {
 		String host = "127.0.0.1";
 		int port = 7999;
 		Envelope msg = new Envelope();
-		Envelope msg1 = new Envelope();
 		try {
 			Socket s = new Socket(host, port);
 			Scanner keyboard = new Scanner(System.in);
@@ -52,6 +51,7 @@ public class RSA_client {
 				signature.initSign(Private_Key_Client, new SecureRandom());
 				signature.update(plaintext.getBytes());
 				byte[] sig_ciphertext = signature.sign();
+				System.out.println("The signature generated is: " + sig_ciphertext.toString());
 				msg.addObject(Public_Key_Client);
 				msg.addObject(ciphertext);
 				msg.addObject(sig_ciphertext);
@@ -69,6 +69,7 @@ public class RSA_client {
 				signature.initSign(Private_Key_Client, new SecureRandom());
 				signature.update(plaintext.getBytes());
 				byte[] sig_ciphertext = signature.sign();
+				System.out.println("The signature generated is: " + sig_ciphertext.toString());
 				msg.addObject(Public_Key_Client);
 				msg.addObject(ciphertext);
 				msg.addObject(sig_ciphertext);
@@ -86,6 +87,7 @@ public class RSA_client {
 				signature.initSign(Private_Key_Client, new SecureRandom());
 				signature.update(plaintext.getBytes());
 				byte[] sig_ciphertext = signature.sign();
+				System.out.println("The signature generated is: " + sig_ciphertext.toString());
 				msg.addObject(Public_Key_Client);
 				msg.addObject(ciphertext);
 				msg.addObject(sig_ciphertext);
