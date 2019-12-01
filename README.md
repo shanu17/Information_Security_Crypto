@@ -55,11 +55,11 @@ The client prints the whole certificate, validity period and verifies the signat
 ### Questions
 
 1. What are the limitations of using a self-signed certificate?
-	Self-signed certificates are a risk because they aren't validated by any 3rd party CA.
-	Users other than yourself would not trust your certificate. They are also hard to maintian and revoke.
+Self-signed certificates are a risk because they aren't validated by any 3rd party CA.
+Users other than yourself would not trust your certificate. They are also hard to maintian and revoke.
 2. What are they useful for?
-	Self-Signed certificates are cheaper to use than CA signed certificates and when using in a development environment or in a intranet.
-	They can also be used for personal sites if there are only a few visitors.
+Self-Signed certificates are cheaper to use than CA signed certificates and when using in a development environment or in a intranet.
+They can also be used for personal sites if there are only a few visitors.
 
 ### Side Note
 
