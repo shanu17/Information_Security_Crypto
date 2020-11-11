@@ -26,13 +26,13 @@ public class RSA_client {
 			KeyPairGenerator genKeyPair = KeyPairGenerator.getInstance("RSA");  // Key Pair Gen for RSA
 			genKeyPair.initialize(1024 ,new SecureRandom()); 
 			KeyPair keyPair = genKeyPair.genKeyPair(); 
-		    RSAPublicKey Public_Key_Client = (RSAPublicKey) keyPair.getPublic();	// Client's Public Key
-		    RSAPrivateKey Private_Key_Client = (RSAPrivateKey)keyPair.getPrivate();
-		    RSAPublicKey Public_Key_Server = (RSAPublicKey) Get_from_Server.readObject();
-		    System.out.println("Client Public Key: " + Public_Key_Client);
-		    System.out.println("Client Private Key: " + Private_Key_Client);
-		    Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-		    Signature signature = Signature.getInstance("SHA256withRSA");
+			RSAPublicKey Public_Key_Client = (RSAPublicKey) keyPair.getPublic();	// Client's Public Key
+			RSAPrivateKey Private_Key_Client = (RSAPrivateKey)keyPair.getPrivate();
+			RSAPublicKey Public_Key_Server = (RSAPublicKey) Get_from_Server.readObject();
+			System.out.println("Client Public Key: " + Public_Key_Client);
+			System.out.println("Client Private Key: " + Private_Key_Client);
+			Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+			Signature signature = Signature.getInstance("SHA256withRSA");
 			System.out.println("1. RSA with only Confidentiality");
 			System.out.println("2. RSA with only Integrity");
 			System.out.println("3. RSA with both Confidentiality and Integrity");
